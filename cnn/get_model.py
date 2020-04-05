@@ -119,7 +119,7 @@ def get_resnet_v1(input_shape, depth, num_classes=10):
                     kernel_initializer='he_normal')(y)
 
     # Instantiate model.
-    model = Model(inputs=inputs, outputs=outputs)
+    model = Model(inputs=inputs, outputs=outputs, name='ResNet')
     return model
 
 

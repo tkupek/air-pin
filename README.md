@@ -11,7 +11,7 @@ For the implementation the RTMP stream from a GoPro Hero8 was captured. It was a
 
 ## DNN
 The deep neural network consists of a ResNet18 architecture that was trained for around 50 epochs on around 1500 samples.
-The validation accuracy is around 90%.
+The validation accuracy is 92.79%.
 
 ## Demo
 A demo video can be found at [TODO](youtube.com)

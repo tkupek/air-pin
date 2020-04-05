@@ -7,8 +7,8 @@ import cnn.get_model as get_model
 
 
 if __name__ == '__main__':
-	model_path = os.path.join('model', 'airpin-model_v2.h5')
-	num_epochs = 50
+	model_path = os.path.join('model', 'airpin-model_v3.h5')
+	num_epochs = 100
 	batch_size = 16 
 	validation_size = 0.2
 	resize = (int(1280 / 4), int(720 / 4))
