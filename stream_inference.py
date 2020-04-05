@@ -3,6 +3,7 @@ import os
 import tensorflow as tf
 import numpy as np
 from tensorflow.keras.models import load_model
+from playsound import playsound
 
 
 # Frame Rate to predict the frame, 50 is a good value
@@ -28,12 +29,12 @@ def predict(model, img):
 def add_text(img, pred_text):
     img = np.float32(img / 255.0)
     rectangle_bgr = (255, 255, 255)
-    (text_width, text_height) = cv2.getTextSize(pred_text, 5, fontScale=4, thickness=2)[0]
+    (text_width, text_height) = cv2.getTextSize(pred_text, 5, fontScale=4, thickness=4)[0]
     text_offset_x = int(img.shape[1] / 2) - int(text_width / 2)
     text_offset_y = int(img.shape[0] / 2)
     box_coords = ((text_offset_x - 10, text_offset_y + 10), (text_offset_x + text_width + 10, text_offset_y - text_height - 10))
     cv2.rectangle(img, box_coords[0], box_coords[1], rectangle_bgr, cv2.FILLED)
-    cv2.putText(img=img, text=pred_text, org=(text_offset_x, text_offset_y), fontFace=5, fontScale=4, color=(0, 0, 0), thickness=2)
+    cv2.putText(img=img, text=pred_text, org=(text_offset_x, text_offset_y), fontFace=5, fontScale=4, color=(0, 0, 0), thickness=4)
     return img
 
 
@@ -42,15 +43,15 @@ if __name__ == '__main__':
 
     pin = []
     digits = []
-    skip_frames = 0
 
     if CLASS_FRAMES is not 0:
         print('load model')
-        model = load_model(os.path.join('cnn', 'model', 'airpin-model_v1.h5'))
+        model = load_model(os.path.join('cnn', 'model', 'airpin-model_v3.h5'))
 
     print('Showing camera feed. Click window or press any key to stop.')
     cameraCapture = cv2.VideoCapture(STREAM_URL)
     cv2.namedWindow(WINDOW_NAME)
+    playsound(os.path.join("resources", "beep.wav"))
 
     count_frames = 0
     while True:
@@ -60,11 +61,7 @@ if __name__ == '__main__':
             print('Got empty frame. Will die now.')
             continue
 
-        if skip_frames > 0:
-            frame = np.ones(frame.shape) * 255
-            skip_frames -= 1
-
-        elif CLASS_FRAMES is not 0:
+        if CLASS_FRAMES is not 0:
             if count_frames % CLASS_FRAMES == 0 and len(pin) != 4:
                 class_frame = cv2.resize(frame, resize)
                 pred = predict(model, class_frame)
@@ -73,9 +70,12 @@ if __name__ == '__main__':
 
                 if len(digits) >= rec_level and len(set(digits[-rec_level:])) is 1 and digits[-1] != 10:
                     # digit recognized
-                    pin.append(digits[-1])
-                    print('recognized ' + label_names[digits[-1]])
-                    skip_frames = 5
+                    digit = digits[-1]
+
+                    pin.append(digit)
+                    print('recognized ' + label_names[digit])
+                    playsound(os.path.join("resources", "beep.wav"))
+                    frame = np.ones(frame.shape) * 255
                     digits = []
 
         if len(pin) == 4:
