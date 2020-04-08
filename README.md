@@ -19,4 +19,4 @@ A demo video can be found at [TODO](youtube.com)
 ## Acknowledgements
 [Prof. Dr. Rainer Böhme](https://informationsecurity.uibk.ac.at/people/rainer-boehme/) for the Air-PIN idea
 
-[Stephanie Autherith](https://informationsecurity.uibk.ac.at/people/stephanie-autherith/) for the initial (data_utils.py)[cnn/] implementation
+[Stephanie Autherith](https://informationsecurity.uibk.ac.at/people/stephanie-autherith/) for the initial *data_utils.py* implementation
