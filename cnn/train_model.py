@@ -38,5 +38,5 @@ if __name__ == '__main__':
 
 	print('start training...')
 	save_best = ModelCheckpoint(model_path, save_best_only=True, monitor='val_loss', mode='min', verbose=1)
-	model.fit(train_data, train_labels, validation_data=[test_data, test_labels], epochs=num_epochs, batch_size=batch_size, shuffle=True, verbose=1, callbacks=[save_best])
+	model.fit(train_data, train_labels, validation_data=(test_data, test_labels), epochs=num_epochs, batch_size=batch_size, shuffle=True, verbose=1, callbacks=[save_best])
 
