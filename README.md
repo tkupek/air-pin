@@ -14,7 +14,7 @@ The deep neural network consists of a ResNet18 architecture that was trained for
 The validation accuracy is 92.79%.
 
 ## Demo
-A demo video can be found at [TODO](youtube.com)
+A demo video can be found at [https://www.youtube.com/watch?v=p0YAegATeA8](https://www.youtube.com/watch?v=p0YAegATeA8)
 
 ## Acknowledgements
 [Prof. Dr. Rainer Böhme](https://informationsecurity.uibk.ac.at/people/rainer-boehme/) for the Air-PIN idea
